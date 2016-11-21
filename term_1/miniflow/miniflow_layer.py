@@ -86,7 +86,8 @@ class Sigmoid(Layer):
         """
         # This is a dummy value to prevent numpy errors
         # if you test without changing this method.
-        self.value = self._sigmoid(np.array([lay.value for lay in self.inbound_layers]))
+        self.value = self._sigmoid(
+            np.array([lay.value for lay in self.inbound_layers]))
 
 
 def topological_sort(feed_dict):
@@ -147,3 +148,21 @@ def forward_pass(output_layer, sorted_layers):
         n.forward()
 
     return output_layer.value
+
+
+def MSE(computed_output, ideal_output, n_inputs):
+    """
+    Calculates the mean squared error.
+    
+    `computed_output`: a numpy array
+    `ideal_output`: a numpy array
+    `n_inputs`: the number of training inputs (not including weights
+                or biases) to the network
+    
+    Return the mean squared error of output layer.
+    
+    You will want to use np.linalg.norm to make your calculation easier.
+    
+    Your code here!
+    """
+    return np.square(np.linalg.norm(computed_output - ideal_output)) / (2 * n_inputs)
