@@ -55,6 +55,40 @@ class Linear(Layer):
             self.inbound_layers[0].value, self.inbound_layers[1].value) + \
             self.inbound_layers[2].value
 
+
+class Sigmoid(Layer):
+    """
+    You need to fix the `_sigmoid` and `forward` methods.
+    """
+
+    def __init__(self, layer):
+        Layer.__init__(self, [layer])
+
+    def _sigmoid(self, x):
+        """
+        This method is separate from `forward` because it
+        will be used with `backward` as well.
+
+        `x`: A numpy array-like object.
+
+        Return the result of the sigmoid function.
+
+        Your code here!
+        """
+        return 1 / (1 + np.exp(-x))
+
+    def forward(self):
+        """
+        Set the value of this layer to the result of the
+        sigmoid function, `_sigmoid`.
+
+        Your code here!
+        """
+        # This is a dummy value to prevent numpy errors
+        # if you test without changing this method.
+        self.value = self._sigmoid(np.array([lay.value for lay in self.inbound_layers]))
+
+
 def topological_sort(feed_dict):
     """
     Sort the layers in topological order using Kahn's Algorithm.
