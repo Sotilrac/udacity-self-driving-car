@@ -58,8 +58,8 @@ class Input(Neuron):
 
 
 class Add(Neuron):
-    def __init__(self, x, y):
-        Neuron.__init__(self, [x, y])
+    def __init__(self, *inputs):
+        Neuron.__init__(self, inputs)
 
     def forward(self):
         """
@@ -69,6 +69,23 @@ class Add(Neuron):
         """
         self.value = sum([neu.value for neu in self.inbound_neurons])
 
+
+class Mult(Neuron):
+    def __init__(self, *inputs):
+        Neuron.__init__(self, inputs)
+
+    def forward(self):
+        """
+        Set the value of this neuron to the sum of it's inbound_nodes.
+
+        Your code here!
+        """
+        if 0 in [neu.value for neu in self.inbound_neurons]:
+            self.value = 0
+        elif len(self.inbound_neurons):
+            self.value = 1
+            for neu in self.inbound_neurons:
+                self.value *= neu.value
 
 
 """
