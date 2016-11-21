@@ -88,6 +88,23 @@ class Mult(Neuron):
                 self.value *= neu.value
 
 
+class Linear(Neuron):
+    def __init__(self, inputs, weights, bias):
+        Neuron.__init__(self, inputs)
+        self.weights = weights
+        self.bias = bias
+
+    def forward(self):
+        """
+        Set self.value to the value of the linear function output.
+
+        Your code goes here!
+        """
+        self.value = sum(
+            [neu.value * wei.value for (neu, wei) in zip(
+                self.inbound_neurons, self.weights)])
+        self.value += self.bias.value
+
 """
 No need to change anything below here!
 """
